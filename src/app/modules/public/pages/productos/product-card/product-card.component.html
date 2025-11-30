@@ -1,0 +1,36 @@
+<div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+  <p-carousel [value]="product.images" [numVisible]="1" [numScroll]="1" [circular]="true" [showIndicators]="true" class="h-60">
+    <ng-template let-image pTemplate="item">
+      <div class="h-60 flex items-center justify-center bg-slate-100">
+        <img [src]="image" [alt]="product.name" class="h-full w-full object-cover">
+      </div>
+    </ng-template>
+  </p-carousel>
+  <div class="p-4 space-y-2">
+    <div class="flex justify-between items-start gap-2">
+      <div>
+        <p class="text-sm text-slate-500">{{ product.brand }} · {{ product.reference }}</p>
+        <h3 class="text-xl font-bold">{{ product.name }}</h3>
+        <p class="text-sm text-slate-600">{{ product.category }} / {{ product.subcategory }}</p>
+      </div>
+      <p-tag [value]="product.status" [severity]="product.status === 'Disponible' ? 'success' : 'secondary'"></p-tag>
+    </div>
+    <div class="grid grid-cols-2 gap-2 text-sm text-slate-700">
+      <p><strong>Condición:</strong> {{ product.condition }} ({{ product.condition_scale }}/10)</p>
+      <p><strong>Marca:</strong> {{ product.brand }}</p>
+      <p><strong>Tiempo de uso:</strong> {{ product.use_time.value }} {{ product.use_time.unit }}</p>
+      <p><strong>Estado:</strong> {{ product.internal_category }}</p>
+      <p><strong>Precio actual:</strong> ${{ product.current_price | number }}</p>
+      <p><strong>Precio propuesto:</strong> ${{ product.proposed_price | number }}</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <a class="p-button p-component w-full" [href]="'https://wa.me/573196175263?text=Hola,%20me%20interesa%20saber%20más%20de%20' + product.name + '%20' + product.brand + '%20' + product.reference" target="_blank" rel="noreferrer">
+        <span class="p-button-icon pi pi-whatsapp"></span>
+        <span class="p-button-label">Consultar por WhatsApp</span>
+      </a>
+      <a *ngIf="product.market_link" class="p-button p-button-text p-component" [href]="product.market_link" target="_blank" rel="noreferrer">
+        Ver publicación
+      </a>
+    </div>
+  </div>
+</div>
