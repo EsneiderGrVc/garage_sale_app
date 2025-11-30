@@ -1,0 +1,95 @@
+<div class="bg-white rounded-lg shadow-md overflow-hidden mb-4">
+  <div class="relative">
+    @if (isLoadingImages()) {
+      <div class="w-full aspect-square bg-gray-100 flex items-center justify-center">
+        <i class="pi pi-spin pi-spinner text-2xl text-gray-400"></i>
+      </div>
+    } @else if (storageImages().length > 0 && !isLoadingImages()) {
+      <p-carousel
+        [value]="storageImages()"
+        [numVisible]="1"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="0"
+        class="w-full"
+      >
+        <ng-template let-image pTemplate="item">
+          <div class="w-full aspect-square bg-gray-100 flex items-center justify-center">
+            <img
+              [src]="image"
+              [alt]="product.name"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </ng-template>
+      </p-carousel>
+    } @else if (product.images && product.images.length > 0 && !isLoadingImages()) {
+      <p-carousel
+        [value]="product.images"
+        [numVisible]="1"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="0"
+        class="w-full"
+      >
+        <ng-template let-image pTemplate="item">
+          <div class="w-full aspect-square bg-gray-100 flex items-center justify-center">
+            <img
+              [src]="image"
+              [alt]="product.name"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </ng-template>
+      </p-carousel>
+    } @else if (!isLoadingImages()) {
+      <div class="w-full aspect-square bg-gray-200 flex items-center justify-center">
+        <span class="text-gray-400">Sin imagen</span>
+      </div>
+    }
+    <div class="absolute top-2 right-2">
+      <p-tag
+        [value]="product.status"
+        [severity]="getStatusSeverity()"
+      ></p-tag>
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="text-lg font-semibold mb-2">{{ product.name }}</h3>
+    @if (product.brand) {
+      <p class="text-sm text-gray-600 mb-1">
+        <span class="font-medium">Marca:</span> {{ product.brand }}
+      </p>
+    }
+    @if (product.reference) {
+      <p class="text-sm text-gray-600 mb-1">
+        <span class="font-medium">Referencia:</span> {{ product.reference }}
+      </p>
+    }
+    <p class="text-sm text-gray-600 mb-1">
+      <span class="font-medium">Condición:</span> {{ product.condition_scale }}/10
+    </p>
+    <p class="text-sm text-gray-600 mb-2">
+      <span class="font-medium">Tiempo de uso:</span> {{ formatUseTime() }}
+    </p>
+    <p class="text-xl font-bold text-green-700 mb-3">
+      {{ formatPrice(product.proposed_price) }}
+    </p>
+    <a
+      [href]="getWhatsAppUrl()"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2"
+    >
+      <p-button
+        label="Lo Quiero!"
+        [icon]="'pi pi-whatsapp'"
+        [raised]="true"
+        severity="success"
+        size="small"
+        class="w-full"
+      />
+    </a>
+  </div>
+</div>
+

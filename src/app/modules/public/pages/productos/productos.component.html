@@ -1,0 +1,65 @@
+<div class="min-h-dvh bg-gray-50 py-2 px-2">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Search and Filter Panel -->
+    <div class="bg-white rounded-lg shadow-md p-4 mb-6 sticky top-0 z-10">
+      <div class="mb-2">
+        <p-floatlabel variant="on">
+        <input
+          id="search"
+          type="text"
+          size="small"
+          pInputText
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchChange()"
+          class="w-full"
+        />
+        <label for="search">Buscar por nombre</label>
+        </p-floatlabel>
+      </div>
+
+      <div>
+        <div class="flex flex-wrap gap-3">
+          <p-button
+            label="Todas"
+            [raised]="true"
+            [rounded]="true"
+            [severity]="isCategorySelected('Todas') ? 'success' : 'secondary'"
+            (onClick)="onCategoryChange('Todas')"
+            size="small"
+          ></p-button>
+          @for (category of categories$ | async; track category) {
+            <p-button
+              [label]="category | titlecase"
+              [raised]="true"
+              [rounded]="true"
+              [severity]="isCategorySelected(category) ? 'success' : 'secondary'"
+              (onClick)="onCategoryChange(category)"
+              size="small"
+            ></p-button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Products by Category -->
+    @if (categoryGroups$ | async; as groups) {
+      @for (group of groups; track group.category) {
+        <div class="mb-2">
+          <h2 class="text-lg underline font-semibold mb-2">{{ group.category }}</h2>
+          <p-divider></p-divider>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
+            @for (product of group.products; track product.id) {
+              <app-product-card [product]="product"></app-product-card>
+            }
+          </div>
+        </div>
+      }
+      @if (groups.length === 0) {
+        <div class="text-center py-8">
+          <p class="text-gray-500">No se encontraron productos.</p>
+        </div>
+      }
+    }
+  </div>
+</div>

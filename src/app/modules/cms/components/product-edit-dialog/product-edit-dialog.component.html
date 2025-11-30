@@ -1,0 +1,291 @@
+<div class="p-4 max-h-[90vh] overflow-y-auto">
+  <h2 class="text-2xl font-bold mb-4">
+    {{ product ? 'Editar Producto' : 'Crear Nuevo Producto' }}
+  </h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="text"
+            pInputText
+            id="name"
+            formControlName="name"
+            class="w-full"
+          />
+          <label for="name">Nombre *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="text"
+            pInputText
+            id="reference"
+            formControlName="reference"
+            class="w-full"
+          />
+          <label for="reference">Referencia</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="text"
+            pInputText
+            id="category"
+            formControlName="category"
+            class="w-full"
+          />
+          <label for="category">Categoría *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-select
+            id="condition"
+            formControlName="condition"
+            [options]="conditionOptions"
+            class="w-full"
+          ></p-select>
+          <label for="condition">Condición *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-inputNumber
+            id="condition_scale"
+            formControlName="condition_scale"
+            [min]="0"
+            [max]="10"
+            class="w-full"
+          ></p-inputNumber>
+          <label for="condition_scale">Escala de condición (0-10) *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="text"
+            pInputText
+            id="brand"
+            formControlName="brand"
+            class="w-full"
+          />
+          <label for="brand">Marca</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-inputNumber
+            id="use_time_value"
+            formControlName="use_time_value"
+            [min]="0"
+            class="w-full"
+          ></p-inputNumber>
+          <label for="use_time_value">Tiempo de uso (valor) *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-select
+            id="use_time_unit"
+            formControlName="use_time_unit"
+            [options]="unitOptions"
+            class="w-full"
+          ></p-select>
+          <label for="use_time_unit">Unidad de tiempo de uso *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="date"
+            pInputText
+            id="purchase_date"
+            formControlName="purchase_date"
+            class="w-full"
+          />
+          <label for="purchase_date">Fecha de compra *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-inputNumber
+            id="total_lifetime_value"
+            formControlName="total_lifetime_value"
+            [min]="0"
+            class="w-full"
+          ></p-inputNumber>
+          <label for="total_lifetime_value">Vida útil total (valor) *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-select
+            id="total_lifetime_unit"
+            formControlName="total_lifetime_unit"
+            [options]="unitOptions"
+            class="w-full"
+          ></p-select>
+          <label for="total_lifetime_unit">Unidad de vida útil *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-inputNumber
+            id="current_price"
+            formControlName="current_price"
+            [min]="0"
+            class="w-full"
+          ></p-inputNumber>
+          <label for="current_price">Precio actual *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-inputNumber
+            id="proposed_price"
+            formControlName="proposed_price"
+            [min]="0"
+            class="w-full"
+          ></p-inputNumber>
+          <label for="proposed_price">Precio propuesto *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-select
+            id="internal_category"
+            formControlName="internal_category"
+            [options]="internalCategoryOptions"
+            class="w-full"
+          ></p-select>
+          <label for="internal_category">Categoría interna *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="text"
+            pInputText
+            id="subcategory"
+            formControlName="subcategory"
+            class="w-full"
+          />
+          <label for="subcategory">Subcategoría</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="text"
+            pInputText
+            id="model"
+            formControlName="model"
+            class="w-full"
+          />
+          <label for="model">Modelo</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <input
+            type="url"
+            pInputText
+            id="market_link"
+            formControlName="market_link"
+            class="w-full"
+          />
+          <label for="market_link">Enlace de mercado *</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel>
+          <p-select
+            id="status"
+            formControlName="status"
+            [options]="statusOptions"
+            class="w-full"
+          ></p-select>
+          <label for="status">Estado *</label>
+        </p-floatlabel>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-2">
+        Imágenes
+      </label>
+      <p-fileUpload
+        id="file-upload"
+        mode="basic"
+        accept="image/*"
+        [multiple]="true"
+        (onSelect)="onFileSelect($event)"
+        [disabled]="isUploading"
+        chooseLabel="Subir imágenes"
+      ></p-fileUpload>
+      @if (isUploading) {
+        <p class="text-sm text-gray-500 mt-2">Subiendo imágenes...</p>
+      }
+      @if (uploadedImages.length > 0) {
+        <div class="grid grid-cols-3 gap-2 mt-4">
+          @for (image of uploadedImages; track image; let i = $index) {
+            <div class="relative">
+              <img
+                [src]="image"
+                alt="Producto"
+                class="w-full h-24 object-cover rounded"
+              />
+              <button
+                type="button"
+                (click)="removeImage(i)"
+                class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+              >
+                ×
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    @if (errorMessage) {
+      <p-message severity="error" [text]="errorMessage"></p-message>
+    }
+
+    <div class="flex gap-2 justify-end mt-4">
+      <p-button
+        type="button"
+        label="Cancelar"
+        severity="secondary"
+        (onClick)="cancel()"
+      ></p-button>
+      <p-button
+        type="submit"
+        label="{{ product ? 'Actualizar' : 'Crear' }}"
+        [disabled]="productForm.invalid || isUploading"
+      ></p-button>
+    </div>
+  </form>
+</div>
+
