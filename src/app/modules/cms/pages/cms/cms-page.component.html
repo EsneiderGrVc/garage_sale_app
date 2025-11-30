@@ -1,0 +1,33 @@
+<div class="max-w-6xl mx-auto py-10 px-4 space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <p class="text-sky-600 font-semibold uppercase tracking-wide">CMS</p>
+      <h1 class="text-3xl font-bold">Gestor del Catálogo Hanes</h1>
+      <p class="text-slate-600">Administra los productos, precios e imágenes del inventario.</p>
+    </div>
+    <button pButton label="Crear nuevo producto" icon="pi pi-plus" (click)="crearProducto()"></button>
+  </div>
+
+  <p-dataView [value]="productos" layout="grid" class="p-4 bg-white rounded-xl shadow-sm">
+    <ng-template pTemplate="grid" let-producto>
+      <div class="col-12 md:col-6 lg:col-4 p-3">
+        <div class="border border-slate-200 rounded-xl p-4 h-full flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-slate-500">{{ producto.brand }}</p>
+              <h3 class="text-lg font-semibold">{{ producto.name }}</h3>
+            </div>
+            <p-tag [value]="producto.status" [severity]="producto.status === 'Disponible' ? 'success' : 'warning'"></p-tag>
+          </div>
+          <p class="text-sm text-slate-600">{{ producto.category }} · {{ producto.subcategory }}</p>
+          <p class="text-sm text-slate-600">Precio propuesto: ${{ producto.proposed_price | number }}</p>
+          <div class="mt-auto flex justify-end">
+            <button pButton label="Editar" class="p-button-text" (click)="editarProducto(producto)"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+
+  <app-product-edit-dialog [visible]="mostrarDialogo" [producto]="productoSeleccionado" (close)="cerrarDialogo()"></app-product-edit-dialog>
+</div>
