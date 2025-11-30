@@ -1,0 +1,112 @@
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{width: '720px'}" [draggable]="false" [resizable]="false" (onHide)="cerrar()" header="Gestión de producto">
+  <form [formGroup]="formulario" class="grid grid-cols-2 gap-4">
+    <p-floatLabel variant="on">
+      <input pInputText id="name" formControlName="name" />
+      <label for="name">Nombre</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText id="reference" formControlName="reference" />
+      <label for="reference">Referencia</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText id="category" formControlName="category" />
+      <label for="category">Categoría</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText id="subcategory" formControlName="subcategory" />
+      <label for="subcategory">Subcategoría</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText id="brand" formControlName="brand" />
+      <label for="brand">Marca</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText id="model" formControlName="model" />
+      <label for="model">Modelo</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText id="condition" formControlName="condition" />
+      <label for="condition">Condición</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input type="number" pInputText id="condition_scale" formControlName="condition_scale" />
+      <label for="condition_scale">Escala de condición (1-10)</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input type="number" pInputText formControlName="current_price" id="current_price" />
+      <label for="current_price">Precio actual</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input type="number" pInputText formControlName="proposed_price" id="proposed_price" />
+      <label for="proposed_price">Precio propuesto</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText formControlName="purchase_date" id="purchase_date" />
+      <label for="purchase_date">Fecha de compra</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText formControlName="market_link" id="market_link" />
+      <label for="market_link">Enlace externo</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText formControlName="internal_category" id="internal_category" />
+      <label for="internal_category">Categoría interna (Venta/Donación)</label>
+    </p-floatLabel>
+
+    <p-floatLabel variant="on">
+      <input pInputText formControlName="status" id="status" />
+      <label for="status">Estado</label>
+    </p-floatLabel>
+
+    <div class="col-span-2 grid grid-cols-2 gap-4" formGroupName="use_time">
+      <div class="text-sm font-semibold text-slate-700">Tiempo de uso</div>
+      <div class="grid grid-cols-2 gap-2 col-span-2">
+        <p-floatLabel variant="on">
+          <input type="number" pInputText formControlName="value" id="use_value" />
+          <label for="use_value">Valor</label>
+        </p-floatLabel>
+        <p-floatLabel variant="on">
+          <input pInputText formControlName="unit" id="use_unit" />
+          <label for="use_unit">Unidad</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <div class="col-span-2 grid grid-cols-2 gap-4" formGroupName="total_lifetime">
+      <div class="text-sm font-semibold text-slate-700">Vida útil total</div>
+      <div class="grid grid-cols-2 gap-2 col-span-2">
+        <p-floatLabel variant="on">
+          <input type="number" pInputText formControlName="value" id="life_value" />
+          <label for="life_value">Valor</label>
+        </p-floatLabel>
+        <p-floatLabel variant="on">
+          <input pInputText formControlName="unit" id="life_unit" />
+          <label for="life_unit">Unidad</label>
+        </p-floatLabel>
+      </div>
+    </div>
+
+    <div class="col-span-2">
+      <p-fileUpload mode="basic" name="imagenes" chooseLabel="Subir imágenes" [auto]="true" (onSelect)="onUpload($event)"></p-fileUpload>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-2">
+      <button pButton label="Cancelar" class="p-button-text" (click)="cerrar()"></button>
+      <button pButton label="Guardar" [loading]="cargando" (click)="guardar()"></button>
+    </div>
+  </ng-template>
+</p-dialog>

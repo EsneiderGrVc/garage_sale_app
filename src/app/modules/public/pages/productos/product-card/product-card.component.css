@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+.p-carousel .p-carousel-indicators .p-carousel-indicator button {
+  background-color: #0ea5e9;
+}
